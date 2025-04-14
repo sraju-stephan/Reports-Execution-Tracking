@@ -1,0 +1,58 @@
+<project name="Utilities" default="ExecutionTracking" basedir=".">
+
+	<property name="bin.dir" value="bin"/>
+	<property name="src.dir" value="src"/>
+	<property name="lib.dir" value="lib"/>
+	
+	<propertyfile file="Tracking.properties">
+		<entry key="TestExecutionOn" value="${TestExecutionOn}"/>
+		<entry key="Release" value="${Release}"/>
+		<entry key="Category" value="${Category}"/>
+		<entry key="LapTime" value="${LapTime}"/>
+		<entry key="ServerUrl" value="${ServerUrl}"/>
+	</propertyfile>
+
+	<path id="libs">
+		<pathelement location="${basedir}/lib/JaperSoft/commons-beanutils-1.8.2.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/commons-collections-3.2.1.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/commons-digester-1.7.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/commons-logging-1.1.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/groovy-all-1.7.5.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/iText-2.1.7.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-4.1.3.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-chart-themes-4.1.3.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-core-renderer.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-extensions-3.5.3.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-fonts-4.1.3.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-htmlcomponent-4.1.1.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-json.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jasperreports-jtidy-r938.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jcommon-1.0.15.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jfreechart-1.0.12.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/jxl-2.6.10.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/spring.jar"/>
+		<pathelement location="${basedir}/lib/JaperSoft/xalan.jar"/>
+		<pathelement location="${basedir}/lib/OJDBC/ojdbc6.jar"/>
+		<pathelement location="${basedir}/lib/OJDBC/ojdbc5.jar"/>
+		<pathelement location="lib/CommonIO/commons-io-2.4.jar"/>
+		<pathelement location="${basedir}/lib/OJDBC/rt.jar"/>
+		<pathelement location="${basedir}\${bin.dir}"/>
+	</path>
+
+	<!-- Compile the java code -->
+	<target name="compileJava">
+		<javac destdir="${bin.dir}" debug="true" includeantruntime="false">
+			<src path="${src.dir}"/>
+			<classpath refid="libs"/>
+		</javac>
+	</target>
+
+	<!-- Run Java file -->
+	<target name="ExecutionTracking" depends="compileJava">
+		<java fork="yes" classname="com.ExecutionTracking">
+			<classpath refid="libs" />
+		</java>
+	</target>
+	
+</project>
+
